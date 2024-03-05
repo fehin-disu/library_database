@@ -36,12 +36,20 @@ if user == 1:
             exit
         user = 2
 
-elif user == 2:
+if user == 2:
     info = [1,2,3,4,5]
     print("Please enter following details:")
     temp = input("Name: ")
     info[2]= temp
-    temp = int(input("Birth Year: "))
+
+    # Possible edge case: year has to be YYYY
+    while(True):
+        try: 
+            temp = int(input("Birth Year: "))
+            break
+        except: 
+            print("Birth year needs to be an integer. Try again.")
+            
     info[3]= temp
     temp = input("Faculty: ")
     info[4]= temp
