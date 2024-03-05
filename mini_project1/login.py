@@ -1,27 +1,44 @@
 import sqlite3
-import getpass
+import getpass # to have the password be hidden during input 
+
+''' connect to the database
+    CHANGE: database name is NOT hardcoded- change later 
+'''
 conn = sqlite3.connect('library.db')
+
+''' create a cursor 
+    so that we can execute SQLite3 commands
+'''
 c= conn.cursor()
+
+''' start of functionality
+    - prompt user to login/signup 
+'''
 print("Do you want to login or signup? please enter 1 for login and 2 for new sign in")
 user = int(input())
+
 if user == 1:
     email = input ("Please enter your email:\n")
     pwd = getpass.getpass("Please enter your password:\n")
     c.execute("SELECT *FROM members")
     members = c.fetchall()
     login = False
-    for items in members:
+    for items in members: # Checking if credentials are in the members to proceed in the system
         if items[0].lower()== email.lower() and items[1]== pwd:
             print("Login Successsful\n")
             login = True
             break
     if login == False:
-        print("login unsuccesful")
-        exit
+        print("Account not found, do you want to sign up instead? Y/N")
+        user1 = input().lower() 
+        if user1 == 'n':
+            exit
+        user = 2
+
 elif user == 2:
     info = [1,2,3,4,5]
     print("Please enter following details:")
-    temp = input("name: ")
+    temp = input("Name: ")
     info[2]= temp
     temp = int(input("Birth Year: "))
     info[3]= temp
@@ -35,7 +52,7 @@ elif user == 2:
     try:
         c.execute("INSERT INTO members VALUES (?,?,?,?,?)",info)
     except:
-        print("cannot make an accout with given info provided")
+        print("cannot make an account with given info provided")
         exit
 
 else:
