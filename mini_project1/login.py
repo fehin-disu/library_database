@@ -15,6 +15,7 @@ c= conn.cursor()
     - prompt user to login/signup 
 '''
 print("Do you want to login or signup? please enter 1 for login and 2 for new sign in")
+
 user = int(input())
 
 if user == 1:
