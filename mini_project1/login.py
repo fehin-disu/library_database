@@ -32,8 +32,8 @@ if user == 1:
     if login == False:
         print("Account not found, do you want to sign up instead? Y/N")
         user1 = input().lower() 
-        if user1 == 'n':
-            exit
+        if user1 != 'y':
+            exit()
         user = 2
 
 if user == 2:
@@ -62,10 +62,10 @@ if user == 2:
         c.execute("INSERT INTO members VALUES (?,?,?,?,?)",info)
     except:
         print("cannot make an account with given info provided")
-        exit
+        exit()
 
 else:
-    exit
+    exit()
 
 conn.commit()
 
