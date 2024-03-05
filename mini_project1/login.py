@@ -2,7 +2,7 @@ import sqlite3
 import getpass
 conn = sqlite3.connect('library.db')
 c= conn.cursor()
-print("Do you want to login or signup? please enter 1 for login and 2 for new sign in")
+print("Do you want to login or signup? please enter 1 for login and 2 for new sign in?")
 user = int(input())
 if user == 1:
     email = input ("Please enter your email:\n")
