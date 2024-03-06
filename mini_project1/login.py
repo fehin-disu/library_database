@@ -68,5 +68,5 @@ else:
     exit()
 
 conn.commit()
-
+conn.close()
     

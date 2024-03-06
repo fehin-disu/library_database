@@ -1,9 +1,12 @@
 import sqlite3
 conn = sqlite3.connect('library.db')
-c= conn.cursor()
+c = conn.cursor()
 c.execute("PRAGMA foreign_keys = ON")
-
-c.execute('DROP TABLE members')
+c.execute('drop table if exists reviews')
+c.execute('drop table if exists penalties')
+c.execute('drop table if exists borrowings')
+c.execute('drop table if exists books')
+c.execute('drop table if exists members')
 
 members_query = """CREATE TABLE members (
     email CHAR(100),
@@ -12,11 +15,10 @@ members_query = """CREATE TABLE members (
     byear INTEGER,
     faculty CHAR(100),
     PRIMARY KEY (email)
-);"""
+)"""
 
 c.execute(members_query)
 
-c.execute('DROP TABLE books')
 
 c.execute("""
 CREATE TABLE books (
@@ -26,8 +28,6 @@ CREATE TABLE books (
     pyear INTEGER,
     PRIMARY KEY (book_id)
 )""")
-
-c.execute('DROP TABLE borrowings')
 
 c.execute("""
 
@@ -42,7 +42,6 @@ CREATE TABLE borrowings(
     FOREIGN KEY (book_id) REFERENCES books(book_id)
 )""")
 
-c.execute('DROP TABLE penalties')
 
 c.execute("""
 CREATE TABLE penalties(
@@ -101,7 +100,7 @@ c.executemany("INSERT INTO books VALUES (?,?,?,?)",books_many)
 c.executemany("INSERT INTO members VALUES (?,?,?,?,?)",members_many)
 c.executemany("INSERT INTO borrowings VALUES (?,?,?,?,?)",borrowings_many)
 c.executemany("INSERT INTO penalties VALUES (?,?,?,?)",penalties_many)
-
+c.executemany("INSERT INTO reviews VALUES (?,?,?,?,?,?)",reviews_many)
 conn.commit()
 
 #Close our connection
