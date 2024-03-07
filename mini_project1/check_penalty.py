@@ -14,6 +14,7 @@ def check_penalty(email):
     if len(penalties)==0:
         print("You have no penalties.")
         return
+    print("\nYour penalties: ")
     for items in penalties:
         print("Pid: {}, Paid_amount: {}, Total amount:{}".format(items[0],items[1],items[2]))
     user_in = input("Do you want to pay any penalties now? Please enter Y/N.")
@@ -37,15 +38,17 @@ def check_penalty(email):
                         if paid_amount == None:
                             paid_amount = 0
                         remaining_pay = items[2]-paid_amount
+                        if current_pay ==0:
+                            print("You cannot pay 0 dollars.")
                         if current_pay>remaining_pay:
                             print("You entered the amount greater than due amount.")
                         else:
                             break
                     break
-                if pid_found!= True:
-                    again_pid = input("Pid not found. Do you want to enter Pid again (Y/N): ")
-                    if again_pid.lower()!= 'y':
-                        return
+            if pid_found!= True:
+                again_pid = input("Pid not found. Do you want to enter Pid again (Y/N): ")
+                if again_pid.lower()!= 'y':
+                    return
 
         
         c.execute("""UPDATE penalties

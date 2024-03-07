@@ -15,9 +15,11 @@ def login():
     ''' start of functionality
         - prompt user to login/signup 
     '''
-    print("Do you want to login or signup? please enter 1 for login and 2 for new sign in")
-
-    user = int(input())
+    print("Do you want to login or signup? please enter 1 for login and 2 for new sign in or any other character to exit.")
+    try:
+        user = int(input())
+    except: 
+        return -1
 
     if user == 1:
         email = input ("Please enter your email:\n")
