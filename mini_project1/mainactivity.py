@@ -12,7 +12,18 @@ def main():
     email = success
     # menu 
     while True:
+        while True:
+            try:
+                next_step = int(input("Please enter 1 to see the menu and 2 to log out: "))
+                if next_step ==1 or next_step == 2:
+                    break   
+            except:
+                print("Please give a valid input.")
+        if next_step ==2:
+            print("Logged out successfully")
+            exit()
         user_options = menu()
+
         if user_options == 5:
             print("Logged out successfully")
             exit()
