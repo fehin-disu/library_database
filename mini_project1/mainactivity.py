@@ -1,6 +1,6 @@
 from login import login
 from menu import menu
-from memberprofile import member_profile
+from memberprofile import member_profile, get_book_info, get_profile
 import returningabook
 from check_penalty import check_penalty
 
@@ -44,7 +44,7 @@ def main():
         else:
             #Can change the if to CASE statements
             if user_options == 1:
-                memberprofile(email)
+                member_profile(email)
             if user_options ==2:
                 returningabook(email)
             # if user_options == 3:
