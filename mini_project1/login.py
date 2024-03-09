@@ -7,18 +7,17 @@ def login():
     '''
     conn = sqlite3.connect('library.db')
 
-    ''' create a cursor 
-        so that we can execute SQLite3 commands
-    '''
+
     c= conn.cursor()
 
-    ''' start of functionality
-        - prompt user to login/signup 
-    '''
+    # start of functionality
+
     print("Do you want to login or signup? please enter 1 for login and 2 for new sign in or any other character to exit.")
     try:
         user = int(input())
     except: 
+        conn.commit()
+        conn.close()
         return -1
 
     if user == 1:
@@ -31,11 +30,15 @@ def login():
             if items[0].lower()== email.lower() and items[1]== pwd:
                 print("Login Successsful\n")
                 login = True
+                conn.commit()
+                conn.close()
                 return email
         if login == False:
             print("Account not found, do you want to sign up instead? Y/N")
             user1 = input().lower() 
             if user1 != 'y':
+                conn.commit()
+                conn.close()
                 return -1
             user = 2
 
@@ -44,7 +47,6 @@ def login():
         print("Please enter following details:")
         temp = input("Name: ")
         info[2]= temp
-
         # Possible edge case: year has to be YYYY
         while(True):
             try: 
@@ -63,15 +65,16 @@ def login():
         info = tuple(info)
         try:
             c.execute("INSERT INTO members VALUES (?,?,?,?,?)",info)
+            conn.commit()
+            conn.close()
             return email
         except:
             print("cannot make an account with given info provided")
+            conn.commit()
+            conn.close()
             return -1
 
     else:
         return -1
 
-    conn.commit()
-    conn.close()
-    return 0
         

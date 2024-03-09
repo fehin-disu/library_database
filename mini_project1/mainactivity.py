@@ -1,6 +1,6 @@
 from login import login
 from menu import menu
-import memberprofile
+from memberprofile import member_profile
 import returningabook
 from check_penalty import check_penalty
 

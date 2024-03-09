@@ -1,9 +1,15 @@
 import sqlite3
 conn = sqlite3.connect('library.db')
 c= conn.cursor()
+print("######MEMBERS##########\n")
 c.execute("SELECT * FROM members")
+rows = c.fetchall() 
+for row in rows: 
+    print('MEMBER -->',end='')
+    print(row)
 print(c.fetchall())
 print("\n")
+print("######BORROWINGS##########\n")
 c.execute("SELECT * FROM borrowings")
 print(c.fetchall())
 print("######Penalties##########\n")

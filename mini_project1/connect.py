@@ -6,6 +6,7 @@ def connect(path):
     This code is based off the lab code provided in eClass
     Returns a connection and a cursor based off the parameter path.
     For testing purposes for now: enter the param as library.db
+    May be temporary.
     """
     global connection, cursor
 
