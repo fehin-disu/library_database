@@ -27,12 +27,33 @@ def login():
         members = c.fetchall()
         login = False
         for items in members: # Checking if credentials are in the members to proceed in the system
-            if items[0].lower()== email.lower() and items[1]== pwd:
+            if items[0].lower()== email.lower() and items[1]== pwd: 
                 print("Login Successsful\n")
                 login = True
                 conn.commit()
                 conn.close()
                 return email
+            # new code below
+            elif items[0].lower()== email.lower():
+                attempt = True
+                while(attempt):
+                    prompt = input("Wrong password. Try again? Type Y for Yes or type any other character to exit.\n")
+                    if (prompt.lower() == 'y'):
+                        pwd_attempt = getpass.getpass("Please enter your password:\n")
+                        if items[1]== pwd_attempt:
+                            print("Login Successsful\n")
+                            login = True
+                            attempt = False
+                            conn.commit()
+                            conn.close()
+                            return email
+                    else: # to exit
+                        print("Exiting...")
+                        conn.commit()
+                        conn.close()
+                        return
+
+                    
         if login == False:
             print("Account not found, do you want to sign up instead? Y/N")
             user1 = input().lower() 
