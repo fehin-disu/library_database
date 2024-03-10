@@ -51,7 +51,7 @@ def login():
                         print("Exiting...")
                         conn.commit()
                         conn.close()
-                        return
+                        return -1
 
                     
         if login == False:
