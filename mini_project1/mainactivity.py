@@ -1,10 +1,17 @@
 from login import login
 from menu import menu
-from memberprofile import member_profile, get_book_info, get_profile
+from member_profile import member_profile, get_book_info, get_profile
+from connect import connect
 import returningabook
 from check_penalty import check_penalty
 
 def main(): 
+    # ask for the db 
+    path_input = input("Please provide the path for the database (Form of ./path/databasename.db):")
+    connect(path_input)
+
+    # PATH_INPUT MUST BE THROWN AS AN ARGUMENT... Global variables won't work as path is still needed.
+
     #login() returns an email of the user if the login or signup was successful and returns -1 if it was unsuccessful
     success = login()
     if success ==-1:
@@ -44,7 +51,7 @@ def main():
         else:
             #Can change the if to CASE statements
             if user_options == 1:
-                member_profile(email)
+                member_profile(email,path_input)
             if user_options ==2:
                 returningabook(email)
             # if user_options == 3:

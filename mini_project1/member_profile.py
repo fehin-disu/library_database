@@ -7,23 +7,22 @@ Penalty information, displaying the number of unpaid penalties (any penalty that
 
 """
 
-import sqlite3
-from connect import connect
-
+from connect import connect 
 # Get the personal information 
 
-# Define module-level variables
-conn, cursor = connect('library.db')
-
-def member_profile(email):
+def member_profile(email,path_input):
+    global connection, cursor
+    connection, cursor = connect(path_input)
     get_profile(email)
     get_book_info(email)
+    
     
 
 def get_profile(email): 
     """
     Get and display the relevant member info: name, email, byear
     """
+    global connection, cursor
 
     #members (email, passwd, name, byear, faculty)
     profile_query = ''' 
@@ -50,7 +49,7 @@ def get_book_info(email):
     and overdue borrowings, which is the number of their current borrowings that are not returned within the deadline. 
     The return deadline is 20 days after the borrowing date.
     """
-
+    global connection, cursor
     # borrowings (bid, member, book_id, start_date, end_date)
 
     #1) borrowed and returned COUNT IT
