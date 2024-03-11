@@ -12,9 +12,11 @@ from connect import connect
 
 def member_profile(email,path_input):
     global connection, cursor
-    connection, cursor = connect(path_input)
+    connection, cursor = connect(path_input) # NEW CONNECTION, CLOSE!
     get_profile(email)
     get_book_info(email)
+    display_penalty(email)
+    connection.close()
     
     
 
@@ -82,8 +84,48 @@ def get_book_info(email):
         cursor.execute(overdue_query, (email,))
         count3 = cursor.fetchone()
 
+
         print("Previous borrowings:", count[0] if count else 0)
         print("Current borrowings:", count2[0] if count2 else 0)
         print("Overdue borrowings:", count3[0] if count3 else 0)
     except Exception as e:
         print(f"Error: {e}")
+
+    
+"""
+Penalty information: displaying the number of unpaid penalties 
+(any penalty that is not paid in full), and the 
+user's total debt amount on unpaid penalties.
+""" 
+
+def display_penalty(email): 
+    # penalties (pid, bid, amount, paid_amount)
+    
+    # display the number of unpaid penalties: paid - amount > 0, unpaid 
+
+    #borrowings (bid, member, book_id, start_date, end_date)
+    #penalties (pid, bid, amount, paid_amount)
+
+
+    unpaid_query ='''   SELECT COUNT(*)
+                        FROM borrowings b  
+                        LEFT JOIN penalties p
+                        WHERE b.member = ? AND p.bid = b.bid AND p.amount - COALESCE(p.paid_amount,0) > 1;'''
+    
+    
+    
+    # users total debt amount on unpaid penalties - all the amount that has not been paid. 
+
+    total_debt_query = '''SELECT SUM(p.amount -COALESCE(p.paid_amount,0))
+                          FROM borrowings b  
+                          LEFT JOIN penalties p
+                          WHERE b.member = ? AND p.bid = b.bid AND p.amount - COALESCE(p.paid_amount,0) > 1;
+                        '''
+    
+    cursor.execute(unpaid_query, (email,))
+    unpaid = cursor.fetchone()
+    cursor.execute(total_debt_query, (email,))
+    debt = cursor.fetchone()
+
+    print("Number of unpaid penalties: ", unpaid[0] if unpaid else 0)
+    print("Total debt amount of unpaid penalties:", debt[0] if debt else 0)

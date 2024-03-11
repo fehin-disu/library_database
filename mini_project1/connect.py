@@ -1,6 +1,5 @@
 import sqlite3
 
-
 def connect(path_input):
     """ 
     This code is based off the lab code provided in eClass
@@ -10,6 +9,6 @@ def connect(path_input):
     """
     connection = sqlite3.connect(path_input) # connect to path 
     cursor = connection.cursor() # connect the cursor to connection, allowing SQL queries to be able to do. 
-    cursor.execute(' PRAGMA forteign_keys=ON; ')
+    cursor.execute(' PRAGMA foreign_keys=ON; ')
     connection.commit()
     return connection, cursor

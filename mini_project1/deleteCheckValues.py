@@ -16,7 +16,10 @@ for row in rowsB:
 print("######Penalties##########\n")
 print('\n')
 c.execute("SELECT * FROM penalties")
-print(c.fetchall())
+rowsC= c.fetchall() 
+for row in rowsC: 
+    print('PENALTIES -->',end='')
+    print(row)
 print('\n')
 print("#######REVIEWS##########")
 c.execute("Select * FROM reviews")

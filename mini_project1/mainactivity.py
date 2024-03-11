@@ -1,6 +1,6 @@
 from login import login
 from menu import menu
-from member_profile import member_profile, get_book_info, get_profile
+from member_profile import member_profile
 from connect import connect
 import returningabook
 from check_penalty import check_penalty
@@ -8,7 +8,6 @@ from check_penalty import check_penalty
 def main(): 
     # ask for the db 
     path_input = input("Please provide the path for the database (Form of ./path/databasename.db):")
-    connect(path_input)
 
     # PATH_INPUT MUST BE THROWN AS AN ARGUMENT... Global variables won't work as path is still needed.
 
