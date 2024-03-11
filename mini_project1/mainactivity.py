@@ -3,7 +3,7 @@ from menu import menu
 from memberprofile import member_profile, get_book_info, get_profile
 import returningabook
 from check_penalty import check_penalty
-
+from searchbooks import search_books
 def main(): 
     #login() returns an email of the user if the login or signup was successful and returns -1 if it was unsuccessful
     success = login()
@@ -47,8 +47,9 @@ def main():
                 member_profile(email)
             if user_options ==2:
                 returningabook(email)
-            # if user_options == 3:
-            #     searchforbooks(email)
+            if user_options == 3:
+                keyword = input("Enter the keyword you want to search: ")
+                search_books(email,keyword)
             if user_options == 4:
                 check_penalty(email)
 main()

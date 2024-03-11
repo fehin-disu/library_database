@@ -1,20 +1,12 @@
 import sqlite3
 from login import login
+from datetime import date, timedelta
 
 conn = sqlite3.connect('library.db')
 c= conn.cursor()
 
-# Borrow a book 
-def borrow_book_id(email, book_id):
-    c.execute("""
-                INSERT INTO borrowings (bid, member)
-                VALUES (?, ?);
-                """, (book_id, email))
-    conn.commit()
-    print("Book borrowed successfully.")
-
 # Search for books
-def search_books(keyword, page=1):
+def search_books(email,keyword, page=1):
     keyword = f"%{keyword}%" # prepares the keyword for use in SQL LIKE clause, allows for partial matching of the keyword
 
     offset = (page - 1) * 5 # calculates the offset for pagination, first page will be offset 0
@@ -44,9 +36,21 @@ def search_books(keyword, page=1):
     if show_more == 'b':
         borrow_book_id = input("Enter the book ID you want to borrow: ")
         if borrow_book_id:
-            borrow_book_id(login(),int(borrow_book_id))
+            borrow_book_id(email,int(borrow_book_id))
     elif show_more == '':
         search_books(keyword, page + 1)
 
+# Borrow a book 
+def borrow_book_id(email, book_id):
+    c.execute("""
+                SELECT COUNT(*) FROM borrowings WHERE book_id = ? AND end_date IS NULL""", (book_id,))
+    if c.fetchone()[0] > 0:
+        print("Book already borrowed.")
+        return
+    c.execute("""
+                INSERT INTO borrowings (email, book_id, start_date) VALUES (?, ?, ?)""", (email, book_id, date.today())
+                )
+    conn.commit()
+    print("Book borrowed successfully.")
 
 
