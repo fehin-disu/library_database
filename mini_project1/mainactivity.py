@@ -4,7 +4,7 @@ from member_profile import member_profile
 from connect import connect
 import returningabook
 from check_penalty import check_penalty
-
+from searchbooks import search_books
 def main(): 
     # ask for the db 
     path_input = input("Please provide the path for the database (Form of ./path/databasename.db):")
@@ -53,8 +53,9 @@ def main():
                 member_profile(email,path_input)
             if user_options ==2:
                 returningabook(email)
-            # if user_options == 3:
-            #     searchforbooks(email)
+            if user_options == 3:
+                keyword = input("Enter the keyword you want to search: ")
+                search_books(email,keyword)
             if user_options == 4:
                 check_penalty(email)
 main()
