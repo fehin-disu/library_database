@@ -3,10 +3,13 @@
 from connect import connect 
 from datetime import date # to get current date 
 
-# Get the personal information 
 
 def member_profile(email,path_input):
-    global connection, cursor
+    """
+    This handles the main code of each function in this module
+    """
+    global connection, cursor # used in all the functions in this module
+
     connection, cursor = connect(path_input) # NEW CONNECTION, CLOSE!
     get_profile(email)
     get_book_info(email)
@@ -19,16 +22,14 @@ def get_profile(email):
     """
     Get and display the relevant member info: name, email, byear
     """
-    global connection, cursor
+    global connection, cursor 
 
-    #members (email, passwd, name, byear, faculty)
     profile_query = ''' 
                         SELECT name, email, byear
                         FROM members m 
                         WHERE email = ?;'''
 
     cursor.execute(profile_query, (email,))
-    # cursor stores the values, fetch 
     info = cursor.fetchone()
 
     if info:
@@ -41,29 +42,27 @@ def get_profile(email):
 
 def get_book_info(email):
     """
-    The number of the books they have borrowed and returned (shown as previous borrowings), 
-    the current borrowings which is the number of their unreturned borrowings, 
-    and overdue borrowings, which is the number of their current borrowings that are not returned within the deadline. 
-    The return deadline is 20 days after the borrowing date.
+    Gets the following information
+    Previous borrowings: books they have borrowed and returned
+    Current borrowings: Unreturned
+    Overdue borrowings: SUBSET OF CURRENT that are past the deadline, i.e. borrowing date - today
     """
     global connection, cursor
-    # borrowings (bid, member, book_id, start_date, end_date)
+    current_date = date.today() # today's date 
 
-    current_date = date.today()
-    #1) borrowed and returned COUNT IT
-
+    # Previous borrowings
     borrow_query = ''' 
                         SELECT COUNT(*)
                         FROM borrowings b  
                         WHERE member = ? AND end_date IS NOT NULL;'''
     
-    # Can reduce redundancy below..?
+    # Current borrowings
     current_borrow_query = ''' 
                             SELECT COUNT(*)
                             FROM borrowings b  
                             WHERE member = ? AND end_date IS NULL;'''
     
-    
+    # Overdue borrowings
     overdue_query = ''' 
                             SELECT COUNT(*)
                             FROM borrowings b  
@@ -71,15 +70,15 @@ def get_book_info(email):
     
     try:
     
+        # Talk with SQL
         cursor.execute(borrow_query, (email,))
         count = cursor.fetchone()
         cursor.execute(current_borrow_query, (email,))
         count2 = cursor.fetchone()
-        #overdue 
         cursor.execute(overdue_query, (email,current_date))
         count3 = cursor.fetchone()
 
-
+        # Print
         print("Previous borrowings:", count[0] if count else 0)
         print("Current borrowings:", count2[0] if count2 else 0)
         print("Overdue borrowings:", count3[0] if count3 else 0)
@@ -87,20 +86,14 @@ def get_book_info(email):
         print(f"Error: {e}")
 
     
-"""
-Penalty information: displaying the number of unpaid penalties 
-(any penalty that is not paid in full), and the 
-user's total debt amount on unpaid penalties.
-""" 
+
 
 def display_penalty(email): 
-    # penalties (pid, bid, amount, paid_amount)
-    
-    # display the number of unpaid penalties: paid - amount > 0, unpaid 
+    """ 
+    Responsible for dealing with the penalties
+    """
 
-    #borrowings (bid, member, book_id, start_date, end_date)
-    #penalties (pid, bid, amount, paid_amount)
-
+    # Unpaid penalties
 
     unpaid_query ='''   SELECT COUNT(*)
                         FROM borrowings b  
@@ -109,7 +102,7 @@ def display_penalty(email):
     
     
     
-    # users total debt amount on unpaid penalties - all the amount that has not been paid. 
+    # Total debt
 
     total_debt_query = '''SELECT SUM(p.amount -COALESCE(p.paid_amount,0))
                           FROM borrowings b  
@@ -117,10 +110,12 @@ def display_penalty(email):
                           WHERE b.member = ? AND p.bid = b.bid AND p.amount - COALESCE(p.paid_amount,0) > 1;
                         '''
     
+    # Talk with SQL, fetch values
     cursor.execute(unpaid_query, (email,))
     unpaid = cursor.fetchone()
     cursor.execute(total_debt_query, (email,))
     debt = cursor.fetchone()
 
-    print("Number of unpaid penalties: ", unpaid[0] if unpaid else 0)
+    # Print
+    print("Number of unpaid penalties: ", unpaid[0] if unpaid else 0) # if list is not empty, fetch from the list
     print("Total debt amount of unpaid penalties:", debt[0] if debt else 0)
