@@ -86,6 +86,14 @@ borrowings_many = [(1, 'dave@ualberta.ca', 1, '2023-11-15',None),
 (11, 'marry@ualberta.ca', 4, '2023-11-15',None),
 (12, 'sarah@ualberta.ca', 5, '2023-11-15',None)]
 
+duck_borrowings = [(13,'duck@ualberta.ca',1,'2023-10-15',None), 
+                   (14,'duck@ualberta.ca',2,'2023-01-15',None), 
+                   (15,'duck@ualberta.ca',3,'2023-10-15','2023-10-25'), 
+                   (16,'duck@ualberta.ca',4,'2023-10-15','2023-11-15'),
+                   (17,'duck@ualberta.ca',5,'2023-02-12',	None)]
+
+duck_penalties = [(8,13,100,100), (9,14,100,30)]
+
 penalties_many = [(1, 1, 50,None),
 (2, 2, 50, 20),
 (3, 1, 50, 50),
@@ -101,6 +109,10 @@ c.executemany("INSERT INTO members VALUES (?,?,?,?,?)",members_many)
 c.executemany("INSERT INTO borrowings VALUES (?,?,?,?,?)",borrowings_many)
 c.executemany("INSERT INTO penalties VALUES (?,?,?,?)",penalties_many)
 c.executemany("INSERT INTO reviews VALUES (?,?,?,?,?,?)",reviews_many)
+#DUCK
+c.execute("INSERT INTO members VALUES ('duck@ualberta.ca','duck@','duck',2022,'CS')")
+c.executemany("INSERT INTO borrowings VALUES (?,?,?,?,?)",duck_borrowings)
+c.executemany("INSERT INTO penalties VALUES (?,?,?,?)",duck_penalties)
 conn.commit()
 
 #Close our connection

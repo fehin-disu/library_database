@@ -13,6 +13,12 @@ rowsB= c.fetchall()
 for row in rowsB: 
     print('BORROWING -->',end='')
     print(row)
+print("######books##########\n")
+c.execute("SELECT * FROM books")
+rowsD= c.fetchall() 
+for row in rowsD: 
+    print('BOOK -->',end='')
+    print(row)
 print("######Penalties##########\n")
 print('\n')
 c.execute("SELECT * FROM penalties")
