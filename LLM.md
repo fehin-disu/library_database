@@ -79,9 +79,8 @@ db_connection, db_cursor = connect_to_database(database_path)
 # Now you can use db_connection and db_cursor to interact with the database
 ```
 
-In this example, the connect_to_database function takes a database_path as an argument, establishes a connection to the specified database using sqlite3.connect(), and creates a cursor with connection.cursor(). The function then returns both the connection and cursor as a tuple.
+In this example, the connect_to_database function takes a database_path as an argument, establishes a connection to the specified database using sqlite3.connect(), and creates a cursor with connection.cursor(). The function then returns both the connection and cursor as a tuple. Keep in mind that this is a simple example using SQLite, and you might need to adjust the code based on the specific database you're working with (e.g., MySQL, PostgreSQL). Each database module in Python may have its own way of establishing connections and creating cursors.
 
-Keep in mind that this is a simple example using SQLite, and you might need to adjust the code based on the specific database you're working with (e.g., MySQL, PostgreSQL). Each database module in Python may have its own way of establishing connections and creating cursors.
 ----
 [AI PROMPT 4] does julianday in SQLite3 subtract year as well? like 2024-03-25 and 2023-10-25, would that be more than 20 days 
 
