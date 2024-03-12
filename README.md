@@ -6,13 +6,13 @@ Group member names and ccids (3-4 members)
   ccid3, name2  
 
 # Group work break-down strategy
-Sandhya created login.py, menu.py and check_penalty.py
-Elykah and Sandhya created mainactivity.py
-Elykah assisted Sandhya with login.py 
-Elykah worked on member_profile.py and tested member_profile.py and check_penalties for mock values
-Sandhya worked on mainactivity.py for functionality with the menu and login. 
-Samia worked on returningabook.py
-Fehintola worked on searchbooks.py 
+- Sandhya created login.py, menu.py and check_penalty.py
+- Elykah and Sandhya created mainactivity.py
+- Elykah assisted Sandhya with login.py 
+- Elykah worked on member_profile.py and tested member_profile.py and check_penalties for mock values
+- Sandhya worked on mainactivity.py for functionality with the menu and login. 
+- Samia worked on returningabook.py
+- Fehintola worked on searchbooks.py 
 
 # Code execution guide
 Please add 
