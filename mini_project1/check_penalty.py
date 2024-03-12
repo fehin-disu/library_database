@@ -42,6 +42,8 @@ def check_penalty(email):
                             print("You cannot pay 0 dollars.")
                         elif current_pay>remaining_pay:
                             print("You entered the amount greater than due amount.")
+                        elif current_pay<0:
+                            print("Invalid amount")
                         else:
                             break
                     break
