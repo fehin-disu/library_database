@@ -1,16 +1,17 @@
-import sqlite3
-import getpass # to have the password be hidden during input 
+def login():
+    import sqlite3
+    import getpass # to have the password be hidden during input 
 
-''' connect to the database
-    CHANGE: database name is NOT hardcoded- change later 
-'''
-conn = sqlite3.connect('library.db')
+    ''' connect to the database
+        CHANGE: database name is NOT hardcoded- change later 
+    '''
+    conn = sqlite3.connect('library.db')
 
 
-c= conn.cursor()
+    c= conn.cursor()
 
     # start of functionality
-def main_login():
+
     print("Do you want to login or signup? please enter 1 for login and 2 for new sign in or any other character to exit.")
     try:
         user = int(input())
@@ -20,13 +21,6 @@ def main_login():
         return -1
 
     if user == 1:
-        return login()
-    elif user == 2:
-        return sign_up()
-    else:
-        return -1
-
-def login():
         email = input ("Please enter your email:\n")
         pwd = getpass.getpass("Please enter your password:\n")
         c.execute("SELECT *FROM members")
@@ -67,9 +61,9 @@ def login():
                 conn.commit()
                 conn.close()
                 return -1
-            sign_up()
+            user = 2
 
-def sign_up():
+    if user == 2:
         info = [1,2,3,4,5]
         print("Please enter following details:")
         temp = input("Name: ")
@@ -100,9 +94,6 @@ def sign_up():
             conn.commit()
             conn.close()
             return -1
-
-        
-
 
     else:
         return -1
