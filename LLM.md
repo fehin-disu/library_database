@@ -95,6 +95,12 @@ SELECT julianday('2024-03-25') - julianday('2023-10-25');
 This will return the number of days between March 25, 2024, and October 25, 2023. If the result is more than 20 days, then it will be more than 20 days regardless of the year difference.
 ```
 ---
+## Sandhya's use of AI 
 
+--- 
 
+## Fehintola's use of AI
+
+--- 
+## Samia's use of AI
 
