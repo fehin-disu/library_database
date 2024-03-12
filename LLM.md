@@ -3,6 +3,8 @@
 --- 
 ## Elykah's use of AI 
 
+Elykah only used ChatGPT, https://chat.openai.com/, for the AI tool.
+
 [AI Prompt 1] INPUT: are docstrings before or after the def function() declaration 
 
 OUTPUT: In Python, docstrings are usually placed immediately after the function, class, or module declaration. A docstring is a string literal that occurs as the first statement in a module, function, class, or method definition and is used to document the purpose and usage of the code.
