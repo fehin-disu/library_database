@@ -3,7 +3,7 @@
 Group member names and ccids (3-4 members)  
   elykah, Elykah Tejol  
   adhikar2, Sandhya Adhikari  
-  ccid3, name2  
+  fehintol, Fehintola Disu  
 
 # Group work break-down strategy
 - Sandhya created login.py, menu.py and check_penalty.py
