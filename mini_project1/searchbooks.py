@@ -1,7 +1,8 @@
-import sqlite3
 from login import login
 from datetime import date, timedelta
 from connect import connect
+import sqlite3
+
 
 
 
@@ -30,32 +31,41 @@ def search_books(email,keyword,path_input, page=1):
     if not books:
         print("No books found.") # if no books were found 
         return
-    print("Search results: (Page {page}): ")
+    print("Search results (Page {page}):".format(page=page))
     for book in books:
         print(f"Book ID: {book[0]}, Title: {book[1]}, Author: {book[2]}, Year: {book[3]}, Average Rating: {book[4]}, Status: {book[5]}")
     
     show_more = input("Press Enter to show more results, or type 'b' to borrow a book: ").lower()
     if show_more == 'b':
-        borrow_book_id = input("Enter the book ID you want to borrow: ")
-        if borrow_book_id:
-            borrow_book_id(email,int(borrow_book_id),path_input)
+        bbook_id = input("Enter the book ID you want to borrow: ")
+        if bbook_id:
+            borrow_book(email, int(bbook_id),path_input)
     elif show_more == '':
-        search_books(keyword, page + 1)
+        search_books(email,keyword,path_input, page + 1)
     
     conn.close()
 
 # Borrow a book 
-def borrow_book_id(email, book_id,path_input):
+def borrow_book(email,book_id, path_input):
     conn, c = connect(path_input)
     c.execute("""
                 SELECT COUNT(*) FROM borrowings WHERE book_id = ? AND end_date IS NULL""", (book_id,))
     if c.fetchone()[0] > 0:
         print("Book already borrowed.")
+        conn.close()
         return
-    c.execute("""
-                INSERT INTO borrowings (email, book_id, start_date) VALUES (?, ?, ?)""", (email, book_id, date.today())
+    
+    # Insert a new borrowing record into the database
+    try:
+        c.execute("""
+                INSERT INTO borrowings (member,book_id,start_date) VALUES (?, ?, ?)""", (email, book_id, date.today())
                 )
-    c.commit()
-    print("Book borrowed successfully.")
+        conn.commit()
+        print("Book borrowed successfully.")
+
+    except Exception as e:
+        print(f"Error: {e}")
+    
+    conn.close()
 
 
