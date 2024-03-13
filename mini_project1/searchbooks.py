@@ -1,13 +1,15 @@
 import sqlite3
 from login import login
 from datetime import date, timedelta
+from connect import connect
 
-conn = sqlite3.connect('library.db')
-c= conn.cursor()
+
 
 # Search for books
-def search_books(email,keyword, page=1):
+def search_books(email,keyword,path_input, page=1):
     keyword = f"%{keyword}%" # prepares the keyword for use in SQL LIKE clause, allows for partial matching of the keyword
+
+    conn, c = connect(path_input)
 
     offset = (page - 1) * 5 # calculates the offset for pagination, first page will be offset 0
     c.execute("""
