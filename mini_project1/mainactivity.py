@@ -31,7 +31,7 @@ def main():
             if next_step ==2:
                 #exit the program if the user wants to log out
                 print("Logged out successfully")
-                
+                break
             if next_step == 3:
                 exit()
 
@@ -62,4 +62,5 @@ def main():
                 if user_options == 4:
                     check_penalty(email)
 main()
+        
         

@@ -65,7 +65,7 @@ def login_user(conn,c):
                 conn.commit()
                 conn.close()
                 return -1
-            sign_up()
+            sign_up(conn,c)
 
 def sign_up(conn,c):
         info = [1,2,3,4,5]
