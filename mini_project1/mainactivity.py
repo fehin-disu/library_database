@@ -57,8 +57,8 @@ def main():
                 if user_options ==2:
                     returningabook(email)
                 if user_options == 3:
-                    keyword = input("Enter the keyword you want to search: ")
-                    search_books(email,keyword)
+                    keyword = input("Enter the keyword you want to search: ").lower()
+                    search_books(email,keyword,path_input)
                 if user_options == 4:
                     check_penalty(email)
 main()
