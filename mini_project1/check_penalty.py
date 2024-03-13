@@ -17,7 +17,7 @@ def check_penalty(email):
     print("\nYour penalties: ")
     for items in penalties:
         print("Pid: {}, Paid_amount: {}, Total amount:{}".format(items[0],items[1],items[2]))
-    user_in = input("Do you want to pay any penalties now? Please enter Y/N.")
+    user_in = input("Do you want to pay any penalties now? Please enter Y to continue, other character to go back to menu.")
     if user_in.lower()!='y':
         return
     else:
