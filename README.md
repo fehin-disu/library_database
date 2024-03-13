@@ -16,7 +16,9 @@ Group member names and ccids (3-4 members)
 - Fehintola worked on searchbooks.py 
 
 # Code execution guide
-Please add 
+Run mainactivity.py in the folder mini_project1 
+Provide the path of the database as asked by the program 
+The program is now running. Follow the instructions accordingly as prompted by the program. 
 
 # Names of anyone you have collaborated with (as much as it is allowed within the course policy) or a line saying that you did not collaborate with anyone else.  
 We did not collaborate with anyone else. 
