@@ -35,14 +35,23 @@ def search_books(email,keyword,path_input, page=1):
     for book in books:
         print(f"Book ID: {book[0]}, Title: {book[1]}, Author: {book[2]}, Year: {book[3]}, Average Rating: {book[4]}, Status: {book[5]}")
     
-    show_more = input("Press Enter to show more results, or type 'b' to borrow a book: ").lower()
+    show_more = input("Press Enter to show more results, or type 'b' to borrow a book, or any other character to go back to menu: ").lower().strip()
     if show_more == 'b':
-        bbook_id = input("Enter the book ID you want to borrow: ")
+        while True:
+            try:
+                bbook_id = int(input("Enter the book ID you want to borrow: "))
+                if bbook_id == 0:
+                    print("Book ID cannot be 0")
+                else:
+                    break
+            except:
+                print("Please enter a valid book id.")
         if bbook_id:
             borrow_book(email, int(bbook_id),path_input)
     elif show_more == '':
         search_books(email,keyword,path_input, page + 1)
-    
+    else:
+        return
     conn.close()
 
 # Borrow a book 
@@ -57,14 +66,20 @@ def borrow_book(email,book_id, path_input):
     
     # Insert a new borrowing record into the database
     try:
+
+    
+        # execute if above is good 
         c.execute("""
                 INSERT INTO borrowings (member,book_id,start_date) VALUES (?, ?, ?)""", (email, book_id, date.today())
                 )
         conn.commit()
         print("Book borrowed successfully.")
 
+    
+
     except Exception as e:
-        print(f"Error: {e}")
+        print("BookID does not exist. Going back to menu.")
+        return
     
     conn.close()
 
