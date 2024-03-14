@@ -13,7 +13,8 @@ Group member names and ccids (3-4 members)
 - Elykah worked on member_profile.py and tested member_profile.py and check_penalties with mock values.
 - Sandhya worked on mainactivity.py for functionality with the menu and login. 
 - Samia worked on returningabook.py
-- Fehintola worked on searchbooks.py 
+- Fehintola worked on searchbooks.py
+- Fehintola, Sandhya, and Elykah worked on error-checking main, searchbooks, member profile, login and check penalty together. 
 
 # Code execution guide
 - Prior to running the program, the following tables must be created to a database: members, borrowings, books, penalties, reviews. Values are assumed to be inserted here as well.
