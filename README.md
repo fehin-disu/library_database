@@ -4,7 +4,11 @@ Group member names and ccids (3-4 members)
   elykah, Elykah Tejol  
   adhikar2, Sandhya Adhikari  
 <<<<<<< HEAD
+<<<<<<< HEAD
   ccid3, name2  
+=======
+  fehintol, Fehintola Disu  
+>>>>>>> e704517143eb8cd9021bc3eb37096e1f200a6a28
 =======
   fehintol, Fehintola Disu  
 >>>>>>> e704517143eb8cd9021bc3eb37096e1f200a6a28
@@ -18,7 +22,12 @@ Group member names and ccids (3-4 members)
 - Sandhya worked on mainactivity.py for functionality with the menu and login. 
 - Samia worked on returningabook.py
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Fehintola worked on searchbooks.py 
+=======
+- Fehintola worked on searchbooks.py
+- Fehintola, Sandhya, and Elykah worked on error-checking main, searchbooks, member profile, login and check penalty together. 
+>>>>>>> e704517143eb8cd9021bc3eb37096e1f200a6a28
 =======
 - Fehintola worked on searchbooks.py
 - Fehintola, Sandhya, and Elykah worked on error-checking main, searchbooks, member profile, login and check penalty together. 

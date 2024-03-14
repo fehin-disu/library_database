@@ -99,11 +99,14 @@ This will return the number of days between March 25, 2024, and October 25, 2023
 ---
 ## Sandhya's use of AI 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 --- 
 
 ## Fehintola's use of AI
 =======
+=======
+>>>>>>> e704517143eb8cd9021bc3eb37096e1f200a6a28
 Sandhya did not use any AI tools with her code.
 --- 
 
@@ -243,6 +246,9 @@ In the CASE statement inside the SELECT clause, b.book_id is used for the same r
 In the WHERE clause, b.title and b.author are used to qualify the column names with the books table alias.
 In the ORDER BY clause, b.title and b.author are used to qualify the column names with the books table alias.
 By qualifying the column names with the table alias (b for the books table), SQLite can unambiguously identify which book_id column is being referenced, resolving the ambiguity issue.
+<<<<<<< HEAD
+>>>>>>> e704517143eb8cd9021bc3eb37096e1f200a6a28
+=======
 >>>>>>> e704517143eb8cd9021bc3eb37096e1f200a6a28
 
 --- 
