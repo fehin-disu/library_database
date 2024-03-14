@@ -98,7 +98,7 @@ This will return the number of days between March 25, 2024, and October 25, 2023
 ```
 ---
 ## Sandhya's use of AI 
-
+Sandhya did not use any AI tools with her code.
 --- 
 
 ## Fehintola's use of AI
