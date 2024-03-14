@@ -36,7 +36,7 @@ def search_books(email, keyword, path_input, page=1):
     for book in books:
         print(f"Book ID: {book[0]}, Title: {book[1]}, Author: {book[2]}, Year: {book[3]}, Average Rating: {book[4]}, Status: {book[5]}")
     
-    show_more = input("Press Enter to show more results, or type 'b' to borrow a book, or any other character to go back to menu: ").lower().strip()
+    show_more = input("Press Enter to show more results, or type 'b' to borrow a book, or any other character for other options:").lower().strip()
     if show_more == 'b':
         while True:
             try:
