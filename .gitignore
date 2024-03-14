@@ -1,3 +1,10 @@
+# testing files
+mini_project1/deleteCheckValues
+mini_project1/deleteCreateValues
+mini_project1/library.db
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -169,3 +176,4 @@ $RECYCLE.BIN/
 .AppleDB
 .AppleDesktop
 
+library.db

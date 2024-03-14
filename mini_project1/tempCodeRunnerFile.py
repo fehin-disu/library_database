@@ -8,39 +8,28 @@ def returning_a_book(member,path):
     global connection, cursor
     connection, cursor = connect(path)
 
-    returned_book = []
-    
-    new_book = borrow_book(member)
-    if not new_book:  
+    if not borrow_book(member):  
         return
-
+ 
+        
+        
     while True:
-            bid = int(input("Enter the Borrowing ID of the book you are returning: "))
-            
-            if bid in returned_book:
-                print("This book has already been returned. Please enter a different Borrowing ID.")
-                continue
+        bid = input("Enter the Borrowing ID of the book you are returning: ")
+        if return_and_penalty(bid,member):
+            break
+        else:
+            print("Invalid Borrowing ID. Please try again.")
 
-            if bid in new_book:
-                if return_and_penalty(bid, member):
-                    returned_book.append(bid)
 
-                    ask_review = input("Would you like to write a review and add a rating for this book? (yes/no) ")
-                    if ask_review.lower() == "yes":
-                        add_review(bid, member)
-                    
-
-                    if len(returned_book) == len(new_book):
-                        print("All books have been returned") 
-                        break
-                      
-                    another = input("Do you want to return another book? (yes/no) ")
-                    if another.lower() != "no":
-                        continue
+        
+    ask_review=input("Would you like to write a review and add a rating for this book? (yes/no) ")
+    if ask_review.lower() == "yes":
+        while True:
+            book_id = input("Enter the Borrowing ID of the book for which you want to add a review: ")
+            if add_review(book_id, member):
                 break
             else:
                 print("Invalid Borrowing ID. Please try again.")
-                
 
     
 
@@ -57,13 +46,13 @@ def borrow_book(member):
 
     if len(borrowings)==0:  # Checks if the list of borrowings is empty
         print("You have no borrowings currently.")
-        return None
+        return False
     else:
-        id_values = list()
         for borrowing in borrowings:
             print(f"Borrowing ID: {borrowing[0]}, Title: {borrowing[1]}, Borrowing Date: {borrowing[2]}, Return Deadline: {borrowing[3]}")
-            id_values.append(borrowing[0])
-    return id_values
+        return True    
+
+    
 
 
 def return_and_penalty(bid, member):
@@ -113,18 +102,7 @@ def add_review(bid, member):
     found_book_yes = found_book[0]
 
     write_review = input("Please add your review here.\n")
-    #add_rating = int(input("Please rate the book within 1-5: "))
-
-    while True:
-        add_rating = int(input("Please rate the book within 1-5: "))
-        if 1<=add_rating<=5:
-                break
-        else:
-            print("Invalid rating.")
-
-    print("Your review has been added successfully")
-        
-        
+    add_rating = int(input("Please rate the book within 1-5: "))
     review_date= datetime.today()
 
     cursor.execute("""
@@ -133,6 +111,7 @@ def add_review(bid, member):
                     """, (found_book_yes, member, add_rating, write_review, review_date))
         
     connection.commit()
+    print("Your review has been added successfully")
 
     return True
 
