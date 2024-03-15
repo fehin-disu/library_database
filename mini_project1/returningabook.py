@@ -99,7 +99,7 @@ def return_and_penalty(bid, member):
         penalty_amount = overdue_Date
     else:
         if overdue_Date>25:
-            penalty_amount = overdue_Date+5
+            penalty_amount = overdue_Date
 
     #insert the penalties update
     cursor.execute("""
