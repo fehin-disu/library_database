@@ -60,7 +60,7 @@ def main():
                     keyword = input("Enter the keyword you want to search: ").lower()
                     search_books(email,keyword,path_input)
                 if user_options == 4:
-                    check_penalty(email)
+                    check_penalty(email,path_input)
 main()
         
         
