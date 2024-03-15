@@ -1,8 +1,7 @@
-#When made into functions replace all exit() with return
-def check_penalty(email):
+from connect import connect
+def check_penalty(email,path_input):
     import sqlite3
-    conn = sqlite3.connect('library.db')
-    c= conn.cursor()
+    conn,c = connect(path_input)
     c.execute("""
     SELECT p.pid, p.paid_amount, p.amount
     FROM penalties AS p
@@ -29,6 +28,7 @@ def check_penalty(email):
                 if items[0]==user_pid:
                     pid_found = True
                     while True:
+                        "Keeps asking for input until a valid amount is entered"
                         try:
                             current_pay = int(input("Please enter the amount you want to pay: "))
                         except:
@@ -48,7 +48,8 @@ def check_penalty(email):
                             break
                     break
             if pid_found!= True:
-                again_pid = input("Pid not found. Do you want to enter Pid again (Y/N): ")
+                "If given pid is not found, asks if they want to enter PID again or exit"
+                again_pid = input("Pid not found. Do you want to enter Pid again.Please enter 'y' for yes or any other character for a "No": ")
                 if again_pid.lower()!= 'y':
                     return
 
