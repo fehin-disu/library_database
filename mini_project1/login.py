@@ -8,6 +8,9 @@ from connect import connect
 
     # start of functionality
 def login(path_input):
+    '''
+    Asks user for login or sign up and calls functions accordingly.
+    '''
     conn, c = connect(path_input)
     print("Do you want to login or signup? please enter 1 for login and 2 for new sign in or any other character to exit.")
     try:
@@ -25,6 +28,9 @@ def login(path_input):
         return -1
 
 def login_user(conn,c):
+    '''
+    Performs and validates the login
+    '''
         email = input ("Please enter your email:\n")
         pwd = getpass.getpass("Please enter your password:\n")
         c.execute("SELECT *FROM members")
@@ -68,6 +74,9 @@ def login_user(conn,c):
             sign_up(conn,c)
 
 def sign_up(conn,c):
+    '''
+    Performs and validates the signup
+    '''
         info = [1,2,3,4,5]
         print("Please enter following details:")
         temp = input("Name: ")
