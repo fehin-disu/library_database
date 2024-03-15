@@ -49,7 +49,7 @@ def check_penalty(email,path_input):
                     break
             if pid_found!= True:
                 "If given pid is not found, asks if they want to enter PID again or exit"
-                again_pid = input("Pid not found. Do you want to enter Pid again.Please enter 'y' for yes or any other character for a "No": ")
+                again_pid = input("Pid not found. Do you want to enter Pid again.Please enter 'y' for yes or any other character for a 'No': ")
                 if again_pid.lower()!= 'y':
                     return
 
