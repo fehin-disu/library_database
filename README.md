@@ -14,7 +14,8 @@ Group member names and ccids (3-4 members)
 - Sandhya worked on mainactivity.py for functionality with the menu and login. 
 - Samia worked on returningabook.py
 - Fehintola worked on searchbooks.py
-- Fehintola, Sandhya, and Elykah worked on error-checking main, searchbooks, member profile, login and check penalty together. 
+- Fehintola, Sandhya, and Elykah worked on error-checking main, searchbooks, member profile, login and check penalty together.
+- Elykah reviewed searchbooks.py
 
 # Code execution guide
 - Prior to running the program, the following tables must be created to a database: members, borrowings, books, penalties, reviews. Values are assumed to be inserted here as well.
