@@ -43,7 +43,7 @@ def returning_a_book(member,path):
                         print("All books have been returned") 
                         break
 
-                    another = input("Do you want to return another book? Type yes to return another book and any other character to exit return a book. ")
+                    another = input("Do you want to return another book? Type yes to return another book or any other character to exit return a book. ")
                     if another.lower() == "yes":
                         continue    
         
@@ -95,11 +95,7 @@ def return_and_penalty(bid, member):
     return_deadline = start_date + timedelta(days=20)
 
     overdue_Date = (current_date - return_deadline).days
-    if 0< overdue_Date <= 25:
-        penalty_amount = overdue_Date
-    else:
-        if overdue_Date>25:
-            penalty_amount = overdue_Date
+    penalty_amount = overdue_Date
 
     #insert the penalties update
     cursor.execute("""
