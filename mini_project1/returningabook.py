@@ -43,7 +43,7 @@ def returning_a_book(member,path):
                         print("All books have been returned") 
                         break
 
-                    another = input("Do you want to return another book? Type yes to return another book and any other character to exit. ")
+                    another = input("Do you want to return another book? Type yes to return another book and any other character to exit return a book. ")
                     if another.lower() == "yes":
                         continue    
         
