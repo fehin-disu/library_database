@@ -15,8 +15,10 @@ def returning_a_book(member,path):
         return
 
     while True:  
-            bid = int(input("Enter the Borrowing ID of the book you are returning: ")) #If the borrowing ID is correctly typed and within the unreturned book list
-            
+            try: 
+                bid = int(input("Enter the Borrowing ID of the book you are returning or a non-number character to exit return a book: ")) #If the borrowing ID is correctly typed and within the unreturned book list
+            except:
+                return
             if bid in returned_book:
                 print("This book has already been returned. Please enter a different Borrowing ID.") #checks if the user typed the borrowing ID for a book that has already been returned
                 continue
