@@ -95,8 +95,9 @@ def return_and_penalty(bid, member):
     return_deadline = start_date + timedelta(days=20)
 
     overdue_Date = (current_date - return_deadline).days
-    penalty_amount = overdue_Date
-
+    if overdue_Date>0:
+        penalty_amount = overdue_Date
+        
     #insert the penalties update
     cursor.execute("""
                     INSERT INTO penalties (bid, amount)
